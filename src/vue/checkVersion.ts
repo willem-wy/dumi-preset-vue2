@@ -10,8 +10,9 @@ export default function checkVersion(api: IApi) {
     dep: 'vue',
   });
 
+  // 不存在vue依赖
   if (!vueVersion) {
-    throw new Error('Please install Vue.');
+    throw new Error('请安装 Vue 依赖.');
   }
   logger.info(chalk.cyan.bold(`Vue v${vueVersion}`));
 

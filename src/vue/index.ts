@@ -7,7 +7,7 @@ export default (api: IApi) => {
   api.describe({
     key: 'preset-vue', // dont add `:`, if use `api.writeTmpFile` in plugin
   });
-
+  // 检查版本
   checkVersion(api);
 
   modifyWebpackConfig(api);
@@ -23,5 +23,6 @@ export default (api: IApi) => {
     return config;
   });
 
+  // 注册技术栈
   registerTechStack(api);
 };

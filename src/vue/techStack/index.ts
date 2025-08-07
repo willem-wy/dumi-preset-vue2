@@ -8,9 +8,10 @@ import { VueSfcTechStack } from './sfc';
 const RENDERER_FILENAME = 'renderer.mjs';
 
 export default function registerTechStack(api: IApi) {
+  // 获取vue配置
   const vueConfig = api.userConfig?.vue;
 
-  const pkgPath = getPkgPath('preset-vue2', api.cwd);
+  const pkgPath = getPkgPath('@39nyx/dumi-plugin-preset-vue2', api.cwd);
 
   const libPath = join(pkgPath, '/lib');
 
@@ -24,13 +25,16 @@ export default function registerTechStack(api: IApi) {
   });
 
   const runtimeOpts = {
+    // 指定了 挂载/卸载 Vue 组件的 cancelable 函数所在路径
     rendererPath: getPluginPath(api, RENDERER_FILENAME)
   };
+  console.log('runtimeOpts.rendererPath', runtimeOpts.rendererPath)
 
-  // mark @babel/standalone as external
+  // 将@babel/standalone作为外部依赖，并添加到html head中
   api.addHTMLHeadScripts(() => {
     return [
       {
+        // 有外部配置时，使用外部配置的cdn，否者使用默认cdn
         src: vueConfig?.compiler?.babelStandaloneCDN || BABEL_STANDALONE_CDN,
         async: true,
       },

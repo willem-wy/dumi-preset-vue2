@@ -11,6 +11,10 @@ export const VueSfcTechStack = (runtimeOpts: IDumiTechStackRuntimeOpts) =>
     isSupported(_, lang: string) {
       return ['vue'].includes(lang);
     },
+    /**
+     * 模块加载
+     * @param args
+     */
     onBlockLoad(args) {
       if (!args.path.endsWith('.vue')) return null;
       return {
@@ -18,6 +22,11 @@ export const VueSfcTechStack = (runtimeOpts: IDumiTechStackRuntimeOpts) =>
         content: '',
       };
     },
+    /**
+     * 编译转换 Vue SFC 代码
+     * @param raw
+     * @param opts
+     */
     transformCode(raw, opts) {
       if (opts.type === 'code-block') {
         const filename = opts.fileAbsPath;
@@ -28,6 +37,7 @@ export const VueSfcTechStack = (runtimeOpts: IDumiTechStackRuntimeOpts) =>
           logger.error(js);
           return '';
         }
+        console.log('js', js)
 
         const code = wrapDemoWithFn(js, {
           filename,
