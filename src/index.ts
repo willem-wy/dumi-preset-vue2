@@ -14,6 +14,7 @@ export default (api: IApi) => {
           compiler: zod
             .object({
               babelStandaloneCDN: zod.string().optional(),
+              rendererPath: zod.string().optional()
             })
             .optional(),
         });
