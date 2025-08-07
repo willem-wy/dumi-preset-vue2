@@ -32,13 +32,14 @@ const genViteConfig = (tsx: boolean, sourceDir: string) => {
 import { fileURLToPath, URL } from 'node:url';
 
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-${tsx ? `import vueJsx from '@vitejs/plugin-vue-jsx';` : ''}
+import vue2 from '@vitejs/plugin-vue2';
+${tsx ? `import vue2Jsx from '@vitejs/plugin-vue2-jsx';` : ''}
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
-      vue(),${tsx ? 'vueJsx()' : ''}
+      vue2(),
+      ${tsx ? 'vue2Jsx()' : ''}
     ],
     resolve: {
         alias: {
@@ -49,12 +50,25 @@ export default defineConfig({
 };
 
 const genRenderCode = (mainFileName: string) => `
-import { createApp } from 'vue';
+import Vue from 'vue'
 import App from './${mainFileName}';
 
-const app = createApp(App);
-app.config.errorHandler = (err) => console.error(err);
-app.mount('#app');
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.use(ElementUI);
+
+// 创建实例前配置全局错误处理
+Vue.config.errorHandler = function (err, vm, info) {
+  // 在此处理错误（如发送日志、抛给上层）
+  console.error('Vue 错误:', err, info);
+};
+
+const app = new Vue({
+  render: (h) => h(App)
+});
+
+app.$mount('#app');
 `;
 
 const tsconfig = `
@@ -120,8 +134,9 @@ export function getVueApp({
 
   const deps: Record<string, string> = {};
   const devDeps: Record<string, string> = {
-    '@vitejs/plugin-vue': '~4.0.0',
-    vite: '~4.0.0',
+    '@vitejs/plugin-vue2': '^1.1.2',
+    vite: '^3.0.2',
+    "element-ui": "^2.15.14",
   };
 
   const mainFileName = name === 'index' ? `App.${ext}` : entryFileName;
@@ -150,8 +165,8 @@ export function getVueApp({
     devDeps[depName] = verison;
   });
 
-  deps['vue'] ??= '^3.3';
-  deps['vue-router'] ??= '^4.2';
+  deps['vue'] ??= '^2.7.14';
+  deps['vue-router'] ??= '^3.5.4';
 
   const previewerEntryFileName = isTs
     ? `${sourceDir}index.ts`
@@ -161,7 +176,7 @@ export function getVueApp({
     Object.assign(devDeps, {
       '@tsconfig/node18': '~18.2.2',
       '@types/node': '~18.17.17',
-      '@vitejs/plugin-vue-jsx': '~3.0.2',
+      '@vitejs/plugin-vue2-jsx': '^1.0.2',
       '@vue/tsconfig': '~0.4.0',
       typescript: '~5.2.0',
       'vue-tsc': '~1.8.11',
@@ -198,6 +213,5 @@ export function getVueApp({
     content: genRenderCode(mainFileName),
     isBinary: false,
   };
-
   return files;
 }
