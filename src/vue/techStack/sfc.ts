@@ -37,7 +37,6 @@ export const VueSfcTechStack = (runtimeOpts: IDumiTechStackRuntimeOpts) =>
           logger.error(js);
           return '';
         }
-        console.log('js', js)
 
         const code = wrapDemoWithFn(js, {
           filename,

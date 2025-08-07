@@ -29,7 +29,6 @@ export default function registerTechStack(api: IApi) {
     // 指定了 挂载/卸载 Vue 组件的 cancelable 函数所在路径
     rendererPath: getPluginPath(api, RENDERER_FILENAME)
   };
-  console.log('runtimeOpts.rendererPath', runtimeOpts.rendererPath)
 
   // 将@babel/standalone作为外部依赖，并添加到html head中
   api.addHTMLHeadScripts(() => {
