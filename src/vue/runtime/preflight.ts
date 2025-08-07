@@ -1,4 +1,4 @@
-import { createApp, h, nextTick, type App } from 'vue';
+import Vue from 'vue';
 
 export default function preflight(component: any) {
   return new Promise<void>((resolve, reject) => {
@@ -6,30 +6,30 @@ export default function preflight(component: any) {
     el.style.display = 'none';
     el.style.overflow = 'hidden';
     document.body.appendChild(el);
-    let app!: App;
+    let app!: any;
     function destroy() {
-      nextTick(() => {
-        app.config.errorHandler = void 0;
-        app.unmount();
+      Vue.prototype.$nextTick(() => {
+        app.$destroy();
         el.remove();
       });
     }
-    app = createApp({
+    app = new Vue({
       mounted() {
         resolve();
         destroy();
       },
-      render() {
+      render(h) {
         return h(component);
       },
     });
-    app.config.warnHandler = (msg) => {
+    // 创建实例前配置全局错误处理
+    Vue.config.warnHandler = function (err, vm, info) {
       destroy();
-      reject(new Error(msg));
+      reject(new Error(err));
     };
-    app.config.errorHandler = (error) => {
+    Vue.config.errorHandler = function (err, vm, info) {
       destroy();
-      reject(error);
+      reject(new Error(err as any));
     };
     app.mount(el);
   });
