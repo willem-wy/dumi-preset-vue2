@@ -15,12 +15,13 @@ export default function registerTechStack(api: IApi) {
 
   const libPath = join(pkgPath, '/lib');
 
-  // vue-related runtime files must be placed under .dumi
-  // so that the correct dependencies can be referenced.
+  // 与 Vue 相关的运行时文件写入 .dumi/tmp/{插件名称}目录下，以便引用正确的依赖项
   api.onGenerateFiles(() => {
     api.writeTmpFile({
       path: RENDERER_FILENAME,
-      content: fsExtra.readFileSync(join(libPath, RENDERER_FILENAME), 'utf8'),
+      content: fsExtra.readFileSync(
+        vueConfig?.compiler?.rendererPath ? join(api.cwd, vueConfig.compiler.rendererPath) : join(libPath, RENDERER_FILENAME),
+        'utf8'),
     });
   });
 
