@@ -16,11 +16,7 @@ export const VueJSXTechStack = (runtimeOpts: IDumiTechStackRuntimeOpts) =>
       const { filename } = args;
       return {
         type: 'tsx',
-        content: compile({
-          id: filename,
-          filename,
-          code: args.entryPointCode,
-        }) as string,
+        content: '',
       };
     },
     transformCode(raw, opts) {
