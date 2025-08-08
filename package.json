@@ -11,6 +11,10 @@
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/39Nyx/dumi-preset-vue2.git"
+  },
   "files": [
     "lib",
     "dist",
@@ -54,6 +58,6 @@
     "access": "public"
   },
   "authors": [
-    "jeffwcx <jeffwcx@icloud.com>"
+    "hzj <hezhijian@qq.com>"
   ]
 }
