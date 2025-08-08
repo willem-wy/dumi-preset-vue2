@@ -16,20 +16,21 @@ export default function checkVersion(api: IApi) {
   }
   logger.info(chalk.cyan.bold(`Vue v${vueVersion}`));
 
-  // before 3.3.6 vue/compiler-sfc will register typscript in browser
-  // @vue/compiler-sfc will not register typescript
-  const shouldInstallCompiler = compare(vueVersion, '3.3.6', '<');
-  const hasOwnCompiler = hasDep(api.pkg, '@vue/compiler-sfc');
+  const shouldInstallCompiler = compare(vueVersion, '3.0.0', '>');
+  if (shouldInstallCompiler) {
+    throw new Error('Vue版本过高, 请安装Vue 2.x版本')
+  }
+  const hasOwnCompiler = hasDep(api.pkg, 'vue-template-compiler');
 
-  if (shouldInstallCompiler && !hasOwnCompiler) {
-    throw new Error(`Please install @vue/compiler-sfc v${vueVersion}`);
+  if (!hasOwnCompiler) {
+    throw new Error(`请安装 vue-template-compiler v${vueVersion}`);
   }
 
   if (shouldInstallCompiler) {
     api.modifyConfig((memo) => {
       memo.alias = {
         ...memo.alias,
-        'vue/compiler-sfc': '@vue/compiler-sfc',
+        'vue/compiler-sfc': 'vue-template-compiler',
       };
       return memo;
     });
