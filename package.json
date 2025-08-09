@@ -1,6 +1,6 @@
 {
   "name": "@39nyx/dumi-plugin-preset-vue2",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Vue support plugins for dumi",
   "keywords": [
     "dumi",
