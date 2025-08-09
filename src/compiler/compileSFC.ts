@@ -16,11 +16,21 @@ function render(h) {
 export function compileSFC(options: CompileOptions) {
     const { code } = options;
     const parsed = parseComponent(code);
-    let scriptContent = parsed.script ? parsed.script.content : 'export default {}';
+    let scriptContent: string = parsed.script ? parsed.script.content : 'export default {}';
+    const regex = /export default/
+    let prefixScript: string = ''
+    if (regex.test(scriptContent)) {
+        const regexResult = scriptContent.match(regex)
+        if (regexResult) {
+            const index = regexResult.index
+            prefixScript = scriptContent.slice(0, index)
+            scriptContent = scriptContent.slice(index)
+        }
+    }
     scriptContent = scriptContent.trim().replace('export default', '')
-    let js = `const ${COMP_IDENTIFIER} = ${scriptContent}`;
+    let js = `${prefixScript}\nconst ${COMP_IDENTIFIER} = ${scriptContent}`;
     if (parsed.template) {
-        js += generatorRenderFunction(parsed.template.content);
+        js = generatorRenderFunction(parsed.template.content) + js;
         js += `\n${COMP_IDENTIFIER}.render = render;`
     }
     return {
