@@ -4,11 +4,16 @@ import { COMP_IDENTIFIER, CompileOptions } from "@/compiler/index";
 function generatorRenderFunction(template: string) {
     return `
 import { compile as _compile } from 'vue-template-compiler';
+
+const compiled = _compile(\`${template}\`);
+
 function render(h) {
-    const compiled = _compile(\`${template}\`);
-    const fun = new Function(compiled.render);
-    return fun.call(this);
+    return new Function(compiled.render).call(this)
 }
+
+const staticRenderFns = compiled.staticRenderFns.map(function(fn) {
+  return new Function(fn)
+})
 `
 }
 
@@ -31,7 +36,7 @@ export function compileSFC(options: CompileOptions) {
     let js = `${prefixScript}\nconst ${COMP_IDENTIFIER} = ${scriptContent}`;
     if (parsed.template) {
         js = generatorRenderFunction(parsed.template.content) + js;
-        js += `\n${COMP_IDENTIFIER}.render = render;`
+        js += `\n${COMP_IDENTIFIER}.render = render;\n${COMP_IDENTIFIER}.staticRenderFns = staticRenderFns;`
     }
     return {
         js,
