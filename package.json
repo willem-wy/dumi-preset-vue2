@@ -37,9 +37,9 @@
     "dumi-assets-types": "^2.4.14",
     "element-ui": "^2.15.14",
     "hash-sum": "^2.0.0",
-    "vue": "^2.7.16",
+    "vue": "~2.6",
     "vue-loader": "^17.0.1",
-    "vue-template-compiler": "2.7.16"
+    "vue-template-compiler": "~2.6"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.5",
@@ -52,7 +52,8 @@
   },
   "peerDependencies": {
     "dumi": "^2.0.0",
-    "vue": "^2.7.16"
+    "vue": "^2.6",
+    "vue-template-compiler": "^2.6"
   },
   "publishConfig": {
     "access": "public"
