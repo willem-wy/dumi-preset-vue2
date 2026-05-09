@@ -10,12 +10,13 @@
   },
   "dependencies": {
     "@willem-wy/dumi-plugin-preset-vue2": "workspace:*",
+    "antd": "^6.3.7",
     "dumi-theme-antd": "^0.4.4",
     "element-ui": "^2.15.14",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "vue": "^2.6.14",
-    "vue-template-compiler": "^2.6.14"
+    "vue": "2.6.14",
+    "vue-template-compiler": "2.6.14"
   },
   "devDependencies": {
     "dumi": "^2.4.20",

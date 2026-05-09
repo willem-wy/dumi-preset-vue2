@@ -48,7 +48,7 @@ export default defineConfig({
     webpack5: {},
     publicPath: '/',
     actions: [
-      { text: '开始使用', link: '/vue', type: 'primary' },
+      { text: '开始使用', link: '/demo/vue', type: 'primary' },
     ],
     features: [
       { title: 'Vue2 兼容', details: '兼容 Vue 2.6 版本，与 Element UI 深度集成' },
@@ -58,12 +58,8 @@ export default defineConfig({
       mode: 'override',
       value: [
         {
-          title: 'vue组件',
-          link: '/vue',
-        },
-        {
-          title: 'react组件',
-          link: '/react/demo',
+          title: '组件展示',
+          link: '/demo/vue',
         },
       ],
     },
