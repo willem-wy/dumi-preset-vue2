@@ -5,7 +5,7 @@ import hashId from 'hash-sum';
 
 export const VueJSXTechStack = (runtimeOpts: IDumiTechStackRuntimeOpts) =>
   defineTechStack({
-    name: 'vue3-tsx',
+    name: 'vue2-jsx',
     runtimeOpts,
     isSupported(_, lang: string) {
       return ['jsx', 'tsx'].includes(lang);

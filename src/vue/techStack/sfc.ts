@@ -6,7 +6,7 @@ import hashId from 'hash-sum';
 
 export const VueSfcTechStack = (runtimeOpts: IDumiTechStackRuntimeOpts) =>
   defineTechStack({
-    name: 'vue3-sfc',
+    name: 'vue2-sfc',
     runtimeOpts,
     isSupported(_, lang: string) {
       return ['vue'].includes(lang);

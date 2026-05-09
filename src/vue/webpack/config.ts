@@ -2,15 +2,25 @@ import type Config from '@umijs/bundler-webpack/compiled/webpack-5-chain';
 import type { IApi } from 'dumi';
 import { babelPresetTypeScript } from 'dumi/tech-stack-utils';
 import path from 'node:path';
-import VueLoaderPlugin from 'vue-loader/dist/pluginWebpack5.js';
+import VueLoaderPlugin from 'vue-loader/lib/plugin';
 
-// Webpack configuration mainly refers to @umijs/preset-vue
+// Webpack configuration for Vue2 (using vue-loader v15)
 
 export function getConfig(config: Config, api: IApi) {
   // The internal path in umi is in POSIX format,
   // and include/exclude of webpack needs to be converted to the corresponding format for different systems.
   const dumiSrc = path.resolve(api.paths.absSrcPath);
   const babelInUmi = config.module.rule('src').use('babel-loader').entries();
+
+  // 🔧 关键修复：强制将所有 Vue3 编译器引用重定向到 Vue2
+  config.resolve.alias.set(
+    '@vue/compiler-sfc',
+    require.resolve('vue-template-compiler')
+  );
+  config.resolve.alias.set(
+    'vue/compiler-sfc',
+    require.resolve('vue-template-compiler')
+  );
 
   // react jsx rules will only include the .dumi directory
   config.module.rule('jsx-ts-tsx').include.add(dumiSrc).end();
@@ -38,6 +48,7 @@ export function getConfig(config: Config, api: IApi) {
     .test(/\.m?jsx?$/)
     .resolve.set('fullySpecified', false);
 
+  // Vue2 SFC support (using vue-loader v15)
   config.resolve.extensions.merge(['.vue']).end();
   config.module
     .rule('vue')
@@ -47,10 +58,14 @@ export function getConfig(config: Config, api: IApi) {
     .use('vue-loader')
     .loader(require.resolve('vue-loader'))
     .options({
-      babelParserPlugins: ['jsx', 'classProperties', 'decorators-legacy'],
+      compiler: require('vue-template-compiler'),
+      compilerOptions: {
+        whitespace: 'condense',
+      },
     });
 
-  config.plugin('vue-loader-plugin').use(VueLoaderPlugin);
+  // VueLoaderPlugin is required for vue-loader v15
+  config.plugin('vue-loader-plugin').use(VueLoaderPlugin, [{}]);
 
   // https://github.com/vuejs/vue-loader/issues/1435#issuecomment-869074949
   config.module
