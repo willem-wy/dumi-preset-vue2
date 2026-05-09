@@ -10,5 +10,5 @@
       "@/*": ["src/*"]
     }
   },
-  "exclude": ["lib", "compiled", "dist"]
+  "exclude": ["lib", "compiled", "dist", "example"]
 }

@@ -8,12 +8,11 @@ import { VueSfcTechStack } from './sfc';
 const RENDERER_FILENAME = 'renderer.mjs';
 
 export default function registerTechStack(api: IApi) {
-  // 获取vue配置
   const vueConfig = api.userConfig?.vue;
 
-  const pkgPath = getPkgPath('@39nyx/dumi-plugin-preset-vue2', api.cwd);
+  const pkgPath = getPkgPath('@willem-wy/dumi-plugin-preset-vue2', api.cwd);
 
-  const libPath = join(pkgPath, '/lib');
+  const libPath = join(pkgPath, '/dist');
 
   // 与 Vue 相关的运行时文件写入 .dumi/tmp/{插件名称}目录下，以便引用正确的依赖项
   api.onGenerateFiles(() => {
@@ -40,6 +39,7 @@ export default function registerTechStack(api: IApi) {
       },
     ];
   });
+
   api.modifyConfig((memo) => {
     memo.externals = {
       ...memo.externals,
@@ -48,12 +48,15 @@ export default function registerTechStack(api: IApi) {
     return memo;
   });
 
+  // 注册 Vue JSX 技术栈（只处理 .jsx 文件）
   api.register({
     key: 'registerTechStack',
     stage: 0,
     fn: () => VueJSXTechStack(runtimeOpts),
   });
 
+  // 注册 Vue SFC 技术栈（只处理 .vue 文件）
+  // TSX 由 dumi 原生支持，无需额外处理
   api.register({
     key: 'registerTechStack',
     stage: 1,

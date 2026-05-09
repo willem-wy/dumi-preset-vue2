@@ -45,7 +45,7 @@
     "@types/babel__standalone": "^7.1.7",
     "@umijs/core": "^4.4.10",
     "@vue/babel-plugin-jsx": "^1.1.6",
-    "dumi": "^2.4.20",
+    "dumi": "^2.4.23",
     "father": "^4.1.9",
     "tsup": "^8.0.1"
   },

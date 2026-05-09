@@ -1,0 +1,25 @@
+{
+  "name": "dumi-preset-vue2-examples",
+  "version": "1.0.0",
+  "private": true,
+  "description": "dumi-plugin-preset-vue2 示例项目",
+  "scripts": {
+    "dev": "dumi dev",
+    "build": "dumi build",
+    "start": "pnpm dev"
+  },
+  "dependencies": {
+    "@willem-wy/dumi-plugin-preset-vue2": "workspace:*",
+    "dumi-theme-antd": "^0.4.4",
+    "element-ui": "^2.15.14",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vue": "^2.6.14",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "devDependencies": {
+    "@fta/dumi-theme-antd": "^0.3.41",
+    "dumi": "^2.4.20",
+    "typescript": "^5.0.0"
+  }
+}
