@@ -36,7 +36,7 @@ export function getConfig(config: Config, api: IApi) {
     .options({
       ...babelInUmi.options,
       presets: [...babelInUmi.options.presets, babelPresetTypeScript()],
-      plugins: [require.resolve('../../../compiled/@vue/babel-plugin-jsx')],
+      plugins: [require.resolve('@vue/babel-plugin-jsx')],
     });
 
   config.module.noParse(/^(vue|vue-router|vuex|vuex-router-sync)$/);
