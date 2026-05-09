@@ -18,7 +18,6 @@
     "vue-template-compiler": "^2.6.14"
   },
   "devDependencies": {
-    "@fta/dumi-theme-antd": "^0.3.41",
     "dumi": "^2.4.20",
     "typescript": "^5.0.0"
   }
