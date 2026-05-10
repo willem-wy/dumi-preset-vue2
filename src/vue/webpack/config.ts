@@ -28,6 +28,15 @@ export function getConfig(config: Config, api: IApi) {
     require.resolve('vue-template-compiler')
   );
 
+  // 🔧 关键修复：防止 Vue 2.7 双实例问题
+  // Element-UI 内部使用 require('vue') 获取 CJS 版本 Vue
+  // 而 webpack 对 import 语句优先解析 module 字段（ESM 版本）
+  // 这导致项目中存在两个 Vue 实例，el-table 等组件注册在 CJS Vue 上
+  // 但渲染器使用 ESM Vue，找不到已注册的组件
+  // 此别名强制所有 vue 引用指向同一个文件，确保单例
+  // 参考：https://zhuanlan.zhihu.com/p/114239056（vue-template-compiler 版本一致性原理）
+  config.resolve.alias.set('vue$', require.resolve('vue'));
+
   // 🔧 确保 Vue 2 JSX 运行时依赖从本插件目录解析
   // @vue/babel-preset-jsx 编译后的代码会 import @vue/babel-helper-vue-jsx-merge-props
   // pnpm 严格模式下用户项目可能找不到这个包

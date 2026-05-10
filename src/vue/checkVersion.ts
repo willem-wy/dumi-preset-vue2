@@ -19,13 +19,13 @@ export default function checkVersion(api: IApi) {
   // 检查是否为 Vue 3+ 版本（不支持）
   const isVue3OrHigher = compare(vueVersion, '3.0.0', '>=');
   if (isVue3OrHigher) {
-    throw new Error(`检测到 Vue ${vueVersion}，此插件仅支持 Vue 2.x (推荐 2.6.14)`);
+    throw new Error(`检测到 Vue ${vueVersion}，此插件仅支持 Vue 2.x (2.6.x / 2.7.x)`);
   }
 
   // 检查 vue-template-compiler 是否安装
   const hasOwnCompiler = hasDep(api.pkg, 'vue-template-compiler');
   if (!hasOwnCompiler) {
-    throw new Error(`请安装与 Vue 版本匹配的 vue-template-compiler (推荐 ~2.6.14)`);
+    throw new Error(`请安装与 Vue 版本匹配的 vue-template-compiler (版本必须与 vue 完全一致)`);
   }
 
   // 配置别名：将 vue/compiler-sfc 重定向到 vue-template-compiler（Vue2）

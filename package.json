@@ -1,7 +1,7 @@
 {
   "name": "@willem-wy/dumi-plugin-preset-vue2",
-  "version": "1.0.6",
-  "description": "Vue support plugins for dumi",
+  "version": "1.0.7",
+  "description": "Vue2.7 support plugins for dumi2",
   "keywords": [
     "dumi",
     "plugin",
@@ -38,9 +38,9 @@
     "dumi-assets-types": "^2.4.14",
     "element-ui": "^2.15.14",
     "hash-sum": "^2.0.0",
-    "vue": "~2.6.14",
+    "vue": "~2.7.16",
     "vue-loader": "^15.11.1",
-    "vue-template-compiler": "~2.6.14"
+    "vue-template-compiler": "~2.7.16"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.5",

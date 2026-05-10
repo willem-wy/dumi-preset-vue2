@@ -54,10 +54,47 @@
     </el-form>
 
     <el-table :data="tableData" border style="width: 100%; margin-top: 15px;">
-      <el-table-column prop="date" label="日期"></el-table-column>
+      <el-table-column prop="date" label="日期" sortable>111</el-table-column>
       <el-table-column prop="name" label="姓名"></el-table-column>
-      <el-table-column prop="address" label="地址"></el-table-column>
+      <el-table-column prop="address" label="地址">
+        <template slot-scope="scope">
+          <el-tag :type="getTagType(scope.row.address)">{{ scope.row.address }}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" width="180">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(scope.$index)">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
+
+    <el-divider></el-divider>
+
+    <h3>带分页的表格</h3>
+    <el-table :data="pagedData" border stripe style="width: 100%;">
+      <el-table-column type="index" label="#" width="50"></el-table-column>
+      <el-table-column prop="name" label="姓名"></el-table-column>
+      <el-table-column prop="age" label="年龄" sortable></el-table-column>
+      <el-table-column prop="email" label="邮箱"></el-table-column>
+      <el-table-column prop="status" label="状态">
+        <template slot-scope="scope">
+          <el-tag :type="scope.row.status === '活跃' ? 'success' : 'info'" size="small">
+            {{ scope.row.status }}
+          </el-tag>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-pagination
+      style="margin-top: 15px; text-align: right;"
+      @size-change="handleSizeChange"
+      @current-change="handlePageChange"
+      :current-page="currentPage"
+      :page-sizes="[5, 10, 20]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next"
+      :total="fullTableData.length">
+    </el-pagination>
   </div>
 </template>
 
@@ -84,7 +121,25 @@ export default {
         { date: '2024-01-02', name: '李四', address: '上海市浦东新区' },
         { date: '2024-01-03', name: '王五', address: '广州市天河区' },
       ],
+      fullTableData: [
+        { name: '张三', age: 28, email: 'zhangsan@example.com', status: '活跃' },
+        { name: '李四', age: 35, email: 'lisi@example.com', status: '离线' },
+        { name: '王五', age: 22, email: 'wangwu@example.com', status: '活跃' },
+        { name: '赵六', age: 41, email: 'zhaoliu@example.com', status: '离线' },
+        { name: '钱七', age: 30, email: 'qianqi@example.com', status: '活跃' },
+        { name: '孙八', age: 26, email: 'sunba@example.com', status: '活跃' },
+        { name: '周九', age: 33, email: 'zhoujiu@example.com', status: '离线' },
+        { name: '吴十', age: 29, email: 'wushi@example.com', status: '活跃' },
+      ],
+      currentPage: 1,
+      pageSize: 5,
     }
+  },
+  computed: {
+    pagedData() {
+      const start = (this.currentPage - 1) * this.pageSize;
+      return this.fullTableData.slice(start, start + this.pageSize);
+    },
   },
   methods: {
     handleClick() {
@@ -95,6 +150,26 @@ export default {
     },
     onSubmit() {
       this.$message.success(`查询: ${this.form.name || '全部'}`);
+    },
+    getTagType(address) {
+      if (address.includes('北京')) return 'primary';
+      if (address.includes('上海')) return 'success';
+      if (address.includes('广州')) return 'warning';
+      return 'info';
+    },
+    handleEdit(row) {
+      this.$message.info(`编辑: ${row.name}`);
+    },
+    handleDelete(index) {
+      this.tableData.splice(index, 1);
+      this.$message.success('删除成功');
+    },
+    handleSizeChange(val) {
+      this.pageSize = val;
+      this.currentPage = 1;
+    },
+    handlePageChange(val) {
+      this.currentPage = val;
     },
   },
 }

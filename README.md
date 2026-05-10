@@ -60,8 +60,8 @@
 
 | 技术 | 版本 | 用途 |
 |------|------|------|
-| Vue | ~2.6.14 | 运行时核心 |
-| vue-template-compiler | ~2.6.14 | SFC 编译器 |
+| Vue | ~2.7.16 | 运行时核心 |
+| vue-template-compiler | ~2.7.16 | SFC 编译器 |
 | vue-loader | ^15.11.1 | Webpack Loader |
 | @vue/babel-preset-jsx | ^1.4.0 | Vue 2 JSX 编译 |
 | @vue/babel-helper-vue-jsx-merge-props | ^1.4.0 | Vue 2 JSX 运行时依赖 |
@@ -75,13 +75,13 @@
 
 ```bash
 # 使用 pnpm（推荐）
-pnpm add @willem-wy/dumi-plugin-preset-vue2 vue@~2.6.14 vue-template-compiler@~2.6.14
+pnpm add @willem-wy/dumi-plugin-preset-vue2 vue@~2.7.16 vue-template-compiler@~2.7.16
 
 # 或使用 npm
-npm install @willem-wy/dumi-plugin-preset-vue2 vue@~2.6.14 vue-template-compiler@~2.6.14
+npm install @willem-wy/dumi-plugin-preset-vue2 vue@~2.7.16 vue-template-compiler@~2.7.16
 
 # 或使用 yarn
-yarn add @willem-wy/dumi-plugin-preset-vue2 vue@~2.6.14 vue-template-compiler@~2.6.14
+yarn add @willem-wy/dumi-plugin-preset-vue2 vue@~2.7.16 vue-template-compiler@~2.7.16
 ```
 
 ### 基础配置
@@ -101,7 +101,7 @@ export default defineConfig({
 启动开发服务器后，控制台应显示：
 
 ```
-✓ Vue v2.6.14
+✓ Vue v2.7.x
 ✓ Vue2 编译环境配置完成
 ```
 
@@ -201,7 +201,7 @@ export default defineConfig({
 
 ### Element UI 示例
 
-> **重要提示**：Element UI 要求 Vue 版本不超过 2.7.0，推荐使用 2.6.14。
+> **重要提示**：Element UI 兼容 Vue 2.6.x ~ 2.7.x，推荐使用 Vue 2.7.16。
 
 #### Step 1：创建自定义 Renderer
 
@@ -372,7 +372,7 @@ export default defineConfig({
 
 ### Q6: 如何升级 Vue 版本？
 
-**当前支持范围**：Vue 2.5.x - 2.6.x（推荐 2.6.14）
+**当前支持范围**：Vue 2.6.x - 2.7.x（推荐 2.7.16）
 
 **不支持 Vue 3**：如需 Vue 3 支持，请使用官方的 [@dumijs/preset-vue](https://github.com/umijs/dumi/tree/master/suites/preset-vue)。
 
@@ -382,8 +382,8 @@ export default defineConfig({
 
 | 包名 | 推荐版本 | 说明 |
 |------|----------|------|
-| `vue` | `~2.6.14` | 基准版本 |
-| `vue-template-compiler` | `~2.6.14` | **必须与 vue 版本完全一致** |
+| `vue` | `~2.7.16` | 支持 2.6.x ~ 2.7.x |
+| `vue-template-compiler` | `~2.7.16` | **必须与 vue 版本完全一致** |
 | `vue-loader` | `^15.11.1` | Vue 2 专用版本（非 v17） |
 
 > ⚠️ **关键点**：`vue` 和 `vue-template-compiler` 的版本号必须一致，否则会编译失败！
