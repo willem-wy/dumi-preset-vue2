@@ -34,7 +34,7 @@
 
 ### 共存示例
 
-在/example中含有dumi2.4版本的react和vue组件文档展示示例。
+在 https://github.com/willem-wy/dumi-preset-vue2/tree/main/example 中含有dumi2.4版本的react和vue组件文档展示示例。
 
 ```markdown
 <!-- 同一页面中同时展示 Vue 2 和 React 组件 -->
@@ -43,13 +43,12 @@
 <code src="./demos/ReactButton.tsx" title="React 按钮"></code>
 ```
 
-
 ---
 
 ## ✨ 特性
 
 - 🎯 **Vue 2 与 React 共存**：`.vue`/`.jsx` 按 Vue 2 编译，`.tsx` 按 React 编译，互不干扰
-- ⚡ **零配置启动**：开箱即用，无需复杂配置即可在 Dumi 中使用 Vue 2 组件
+- ⚡ **零配置启动**：开箱即用，无需复杂配置即可在 Dumi ^@2.4 中使用 Vue 2 组件
 - 🔧 **Tech Stack 架构**：基于 Dumi 官方 `IDumiTechStack` 接口实现，稳定可靠
 - 🎨 **组件库集成**：完美支持 Element UI、iView 等 Vue 2 生态组件库
 - 📝 **API Table 自动生成**：自动解析 Vue 组件元数据，生成 API 文档表格
