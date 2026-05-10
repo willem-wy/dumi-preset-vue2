@@ -1,5 +1,6 @@
 ---
-title: dumi-plugin-preset-vue2 示例
+title: vue组件引用
+order: 1
 ---
 
 # 欢迎使用 dumi-plugin-preset-vue2
@@ -8,7 +9,6 @@ title: dumi-plugin-preset-vue2 示例
 
 ## 快速体验
 
-### Vue 2 组件
+### Vue 2 组件引用
 
-<code src="@examples/vue/VueDemo.vue" title="Vue 2 组件（含 Element UI）"></code>
-
+<code src="@examples/vue/vue-demo.vue" title="Vue 2 组件（含 Element UI）"></code>

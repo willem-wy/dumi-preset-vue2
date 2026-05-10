@@ -9,6 +9,7 @@
     "start": "pnpm dev"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.2.2",
     "@willem-wy/dumi-plugin-preset-vue2": "workspace:*",
     "antd": "^6.3.7",
     "dumi-theme-antd": "^0.4.4",
@@ -19,6 +20,7 @@
     "vue-template-compiler": "2.6.14"
   },
   "devDependencies": {
+    "@vue/babel-preset-jsx": "^1.4.0",
     "dumi": "^2.4.20",
     "typescript": "^5.0.0"
   }

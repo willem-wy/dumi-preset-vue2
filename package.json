@@ -1,6 +1,6 @@
 {
   "name": "@willem-wy/dumi-plugin-preset-vue2",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Vue support plugins for dumi",
   "keywords": [
     "dumi",
@@ -31,6 +31,8 @@
     "@dumijs/vue-meta": "^2.4.14",
     "@types/hash-sum": "^1.0.0",
     "@umijs/bundler-webpack": "^4.0.81",
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.4.0",
+    "@vue/babel-preset-jsx": "^1.4.0",
     "codesandbox-import-utils": "^2.2.3",
     "compare-versions": "^6.1.0",
     "dumi-assets-types": "^2.4.14",
@@ -44,7 +46,6 @@
     "@types/babel__core": "^7.20.5",
     "@types/babel__standalone": "^7.1.7",
     "@umijs/core": "^4.4.10",
-    "@vue/babel-plugin-jsx": "^1.1.6",
     "dumi": "^2.4.23",
     "father": "^4.1.9",
     "tsup": "^8.0.1"

@@ -8,14 +8,13 @@ export const VueJSXTechStack = (runtimeOpts: IDumiTechStackRuntimeOpts) =>
     name: 'vue2-jsx',
     runtimeOpts,
     isSupported(_, lang: string) {
-      return ['jsx', 'tsx'].includes(lang);
+      return ['jsx'].includes(lang);
     },
     onBlockLoad(args) {
-      if (!args.path.endsWith('.tsx') && !args.path.endsWith('.jsx'))
+      if (!args.path.endsWith('.jsx') && !args.path.endsWith('.js'))
         return null;
-      const { filename } = args;
       return {
-        type: 'tsx',
+        type: 'jsx',
         content: '',
       };
     },
